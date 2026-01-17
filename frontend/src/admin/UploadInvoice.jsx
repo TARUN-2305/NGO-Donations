@@ -1,10 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function UploadInvoice() {
   const [file, setFile] = useState(null);
   const [amount, setAmount] = useState("");
+  const [milestones, setMilestones] = useState([]);
+  const [selectedMilestone, setSelectedMilestone] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:3000/admin/dashboard")
+      .then(res => res.json())
+      .then(data => {
+        const options = [];
+        data.causes.forEach(cause => {
+          cause.milestones.forEach(ms => {
+            options.push({
+              id: ms.id,
+              label: `${cause.title} - ${ms.description} (₹${ms.allocation})`
+            });
+          });
+        });
+        setMilestones(options);
+      })
+      .catch(console.error);
+  }, []);
 
   async function submitInvoice() {
     if (!file || !amount) {
@@ -20,27 +40,29 @@ export default function UploadInvoice() {
       form.append("file", file);
       form.append("vendor", "0x70997970C51812dc3A010C7d01b50e0d17dc79C8");
       form.append("amount", amount);
+      if (selectedMilestone) {
+        form.append("milestoneId", selectedMilestone);
+      }
 
       const res = await fetch("http://localhost:3000/invoice", {
-  method: "POST",
-  body: form
-});
+        method: "POST",
+        body: form
+      });
 
-if (!res.ok) {
-  const text = await res.text();
-  throw new Error(text);
-}
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text);
+      }
 
-const data = await res.json();
-setMessage(`Invoice submitted. ID: ${data.id}`);
+      const data = await res.json();
+      setMessage(`Invoice submitted. ID: ${data.id}`);
 
     } catch (err) {
-  console.error(err);
-  setMessage(
-    err?.message || "Error submitting invoice (check backend logs)"
-  );
-}
- finally {
+      console.error(err);
+      setMessage(
+        err?.message || "Error submitting invoice (check backend logs)"
+      );
+    } finally {
       setLoading(false);
     }
   }
@@ -48,6 +70,20 @@ setMessage(`Invoice submitted. ID: ${data.id}`);
   return (
     <div>
       <h3>Upload Invoice</h3>
+
+      <div style={{ marginBottom: 10 }}>
+        <label>Select Milestone (Optional):</label><br />
+        <select
+          value={selectedMilestone}
+          onChange={(e) => setSelectedMilestone(e.target.value)}
+          style={{ width: "100%", padding: 5 }}
+        >
+          <option value="">-- No Milestone (Orphan) --</option>
+          {milestones.map(ms => (
+            <option key={ms.id} value={ms.id}>{ms.label}</option>
+          ))}
+        </select>
+      </div>
 
       <input
         type="file"

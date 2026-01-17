@@ -44,3 +44,16 @@ export async function uploadEncryptedBundle(bundle) {
     }
   };
 }
+
+export async function uploadFile(filePath) {
+  const fs = await import("fs");
+  const stream = fs.createReadStream(filePath);
+
+  const result = await pinata.pinFileToIPFS(stream, {
+    pinataMetadata: {
+      name: `raw-invoice-${Date.now()}`
+    }
+  });
+
+  return result.IpfsHash;
+}
