@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 export default function UploadInvoice() {
   const [file, setFile] = useState(null);
+  const [vendor, setVendor] = useState("");
   const [amount, setAmount] = useState("");
   const [milestones, setMilestones] = useState([]);
   const [selectedMilestone, setSelectedMilestone] = useState("");
@@ -27,8 +28,8 @@ export default function UploadInvoice() {
   }, []);
 
   async function submitInvoice() {
-    if (!file || !amount) {
-      setMessage("Please select a file and enter amount.");
+    if (!file || !amount || !vendor) {
+      setMessage("Please fill all fields (File, Vendor, Amount).");
       return;
     }
 
@@ -38,7 +39,7 @@ export default function UploadInvoice() {
     try {
       const form = new FormData();
       form.append("file", file);
-      form.append("vendor", "0x70997970C51812dc3A010C7d01b50e0d17dc79C8");
+      form.append("vendor", vendor);
       form.append("amount", amount);
       if (selectedMilestone) {
         form.append("milestoneId", selectedMilestone);
@@ -93,10 +94,19 @@ export default function UploadInvoice() {
       <br /><br />
 
       <input
+        type="text"
+        placeholder="Vendor Wallet Address (0x...)"
+        value={vendor}
+        onChange={(e) => setVendor(e.target.value)}
+        style={{ width: "100%", padding: 8, marginBottom: 10 }}
+      />
+
+      <input
         type="number"
         placeholder="Claimed Amount (e.g. 40.70)"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
+        style={{ width: "100%", padding: 8 }}
       />
 
       <br /><br />
