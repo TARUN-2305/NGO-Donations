@@ -33,5 +33,185 @@
       "0x50909Eea8B572b23cB39C5e82a8c8e2d0Ed247eF"
     ],
     "status": "APPROVED_QUEUED"
+  },
+  "2": {
+    "id": 2,
+    "vendor": "0xD0BDB0e48440063F09EA680010EC8917F5fc1E9c",
+    "amount": 50,
+    "text": "INVOICE DATA (Image OCR Unavailable - Please upload PDF) \n Vendor: Demo Vendor \n Amount: 0",
+    "extracted": {
+      "invoiceNumber": "INVOICE",
+      "amount": null,
+      "date": null
+    },
+    "mlResult": {
+      "credibility_score": 10,
+      "decision": "REJECT",
+      "flags": [
+        "AMOUNT_MISMATCH",
+        "MISSING_OCR_DATA",
+        "GENERIC_INV_NUM"
+      ],
+      "explanation": "Claimed amount 50 strongly contradicts raw text amount 0; key OCR fields are missing."
+    },
+    "fileCid": "QmdhsX6h9oxGNiQ9Vqq8oj6MXX2tBsG4MXXfX8AUzPks4C",
+    "milestoneId": 2,
+    "ipfs": {
+      "cid": "QmfVbyXCB31zgZthc1ALVPvJXffBdrEbgLfLVbwWmb8bEJ",
+      "encryption": {
+        "algorithm": "aes-256-cbc",
+        "key": "1ff30499ebdef44b1383bec13fdf174e954268b40706064f13d28147e69a9b54",
+        "iv": "5de18f314cf7a017371d0947b9297200"
+      }
+    },
+    "votes": [
+      "0x313739990e71FC982104Bce13818423Ec0c67FeA",
+      "0x50909Eea8B572b23cB39C5e82a8c8e2d0Ed247eF"
+    ],
+    "status": "APPROVED_QUEUED"
+  },
+  "3": {
+    "id": 3,
+    "vendor": "0xD0BDB0e48440063F09EA680010EC8917F5fc1E9c",
+    "amount": 50,
+    "text": "INVOICE DATA (Image OCR Unavailable - Please upload PDF) \n Vendor: Demo Vendor \n Amount: 0",
+    "extracted": {
+      "invoiceNumber": "INVOICE",
+      "amount": null,
+      "date": null
+    },
+    "mlResult": {
+      "credibility_score": 25,
+      "decision": "REVIEW",
+      "flags": [
+        "AMOUNT_MISMATCH",
+        "MISSING_DATA",
+        "GENERIC_INVOICE_NUMBER"
+      ],
+      "explanation": "Claimed amount (50) conflicts with amount (0) found in raw text, and key invoice fields are missing or generic."
+    },
+    "fileCid": "QmdhsX6h9oxGNiQ9Vqq8oj6MXX2tBsG4MXXfX8AUzPks4C",
+    "milestoneId": 3,
+    "ipfs": {
+      "cid": "QmPZMJxmykSsbYpuGcrBPd5meGALYtSvQvj2WofCQ5YWRH",
+      "encryption": {
+        "algorithm": "aes-256-cbc",
+        "key": "5bec032cbb42cb55aa65f2b865bddd1e6ef829b58b4433f88568697f0f2d1976",
+        "iv": "c8db810ff67889acd5c917166d8485ee"
+      }
+    },
+    "votes": [
+      "0x50909Eea8B572b23cB39C5e82a8c8e2d0Ed247eF",
+      "0x4F5bF4A4A3792757444212ab82eB968B76E4fFaE"
+    ],
+    "status": "APPROVED_QUEUED"
+  },
+  "4": {
+    "id": 4,
+    "vendor": "0xD0BDB0e48440063F09EA680010EC8917F5fc1E9c",
+    "amount": 50,
+    "text": "INVOICE DATA (Image OCR Unavailable - Please upload PDF) \n Vendor: Demo Vendor \n Amount: 0",
+    "extracted": {
+      "invoiceNumber": "INVOICE",
+      "amount": null,
+      "date": null
+    },
+    "mlResult": {
+      "credibility_score": 25,
+      "decision": "REVIEW",
+      "flags": [
+        "MISSING_OCR_AMOUNT",
+        "OCR_UNAVAILABLE",
+        "MISSING_DATE",
+        "GENERIC_INVOICE_NUMBER"
+      ],
+      "explanation": "OCR data is unavailable, and critical fields like amount and date are missing or generic, requiring manual review."
+    },
+    "fileCid": "QmS3Z8r7rVuTStaZfYccfFyFNQZJVeJviJneUpYykE3jkk",
+    "milestoneId": 4,
+    "ipfs": {
+      "cid": "QmXmipYp3i7jLLBEBnSayB3xzuCoxF9DwMmsVmPYDJjMR8",
+      "encryption": {
+        "algorithm": "aes-256-cbc",
+        "key": "1f97653b8446000c084b799eefc83386766dae22846625bc4516e1fbfc9dcd53",
+        "iv": "aa6b809eb9f1acfc272a228ffccd1d8d"
+      }
+    },
+    "votes": [
+      "0x4F5bF4A4A3792757444212ab82eB968B76E4fFaE",
+      "0x50909Eea8B572b23cB39C5e82a8c8e2d0Ed247eF"
+    ],
+    "status": "APPROVED_QUEUED"
+  },
+  "5": {
+    "id": 5,
+    "vendor": "0xD0BDB0e48440063F09EA680010EC8917F5fc1E9c",
+    "amount": 3540,
+    "text": "\n\nINVOICE\n# TKT-001\nBrightFuture Supplies Pvt Ltd, Industrial Area, Pune\nBill To:\nCivicFund\nJan 16, 2026\nJan 17, 2026\n₹0.00\nDate:\nDue Date:\nBalance Due:\nItemQuantityRateAmount\nBoys Pants10₹100.00₹1,000.00\nBoys Shirts\n10₹100.00₹1,000.00\nGirls Dress\n10₹100.00₹1,000.00\n₹3,000.00\n₹540.00\n₹3,540.00\n₹3,540.00\nSubtotal:\nTax (18%):\nTotal:\nAmount Paid:\nTerms:\nThis is for the NGO CivicFund and we agree that the payment will be done using the Sepolia ETH",
+    "extracted": {
+      "invoiceNumber": "INVOICE",
+      "amount": 0,
+      "date": null
+    },
+    "mlResult": {
+      "credibility_score": 100,
+      "decision": "APPROVE",
+      "flags": [],
+      "explanation": "The claimed amount of 3540 matches the 'Total' (₹3,540.00) and 'Amount Paid' (₹3,540.00) clearly listed in the raw text snippet."
+    },
+    "fileCid": "QmbN7eESYzRSSix2dn1XZwHrBK1sfEueR1ha834427ZFzc",
+    "milestoneId": 5,
+    "ipfs": {
+      "cid": "Qmdpjxsg95Vsy2TcyTQjQuwyshJ1HfjLamAP4Aq6Szm34t",
+      "encryption": {
+        "algorithm": "aes-256-cbc",
+        "key": "16a6fd352a6152092cc27f2a241181449c029760a1ccc8d8907f868af9a0623e",
+        "iv": "df86c66ae8f968a28edafefec36ba915"
+      }
+    },
+    "votes": [
+      "0x4F5bF4A4A3792757444212ab82eB968B76E4fFaE",
+      "0x50909Eea8B572b23cB39C5e82a8c8e2d0Ed247eF",
+      "0xD0BDB0e48440063F09EA680010EC8917F5fc1E9c",
+      "0x313739990e71FC982104Bce13818423Ec0c67FeA",
+      "0xf61bcc2463c1e000000000000000000000000000",
+      "0x45229837d874f000000000000000000000000000"
+    ],
+    "status": "PAID",
+    "payoutTxHash": "0x4bd76297d0411a67a71bb6e9a8fea4140a527058164d1db89e1e010bd920dbaf"
+  },
+  "6": {
+    "id": 6,
+    "vendor": "0xD0BDB0e48440063F09EA680010EC8917F5fc1E9c",
+    "amount": 5000,
+    "text": "\n\nINVOICE\n# TKT-002\nBrightFuture Supplies Pvt Ltd, Industrial Area, Pune\nBill To:\nCivicFund\nJan 15, 2026\nJan 17, 2026\n-₹2,640.00\nDate:\nDue Date:\nBalance Due:\nItemQuantityRateAmount\nMen shirt pant combo10₹100.00₹1,000.00\nSaree\n10₹100.00₹1,000.00\n₹2,000.00\n₹360.00\n₹2,360.00\n₹5,000.00\nSubtotal:\nTax (18%):\nTotal:\nAmount Paid:\nTerms:\nThis is for the NGO CivicFund and we agree that the payment will be done using the Sepolia ETH",
+    "extracted": {
+      "invoiceNumber": "INVOICE",
+      "amount": 2640,
+      "date": null
+    },
+    "mlResult": {
+      "credibility_score": 20,
+      "decision": "REJECT",
+      "flags": [
+        "claimed_amount_mismatch_invoice_total",
+        "claimed_amount_matches_amount_paid",
+        "invoice_shows_negative_balance_due",
+        "potential_overpayment"
+      ],
+      "explanation": "The invoice clearly states a 'Total:' amount of ₹2,360.00 for goods/services. The claimedAmount of 5000 is explicitly listed under 'Amount Paid: ₹5,000.00', which results in a 'Balance Due:' of -₹2,640.00. This indicates that the amount claimed has already been paid and even overpaid, not that it is currently due for payout."
+    },
+    "fileCid": "QmXJsw6SDk4f9ZYy9butaTCsaEA9X6YD7uZWcejJsKAFSz",
+    "milestoneId": 6,
+    "ipfs": {
+      "cid": "QmYzHZTWbdmAtgvp454D7gZzXs99VJ6zY4xLnp5mkLCzpg",
+      "encryption": {
+        "algorithm": "aes-256-cbc",
+        "key": "d271c2dec80f381f74cd861b0123c7e74cd05c4c0f0cc361938dda038522c43f",
+        "iv": "f2b3a0c434fdaf68d0437ca02416d924"
+      }
+    },
+    "votes": [],
+    "status": "REJECTED"
   }
 }

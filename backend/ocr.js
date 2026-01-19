@@ -1,28 +1,33 @@
 import fs from "fs";
 import { createRequire } from "module";
+import Tesseract from "tesseract.js";
+
 const require = createRequire(import.meta.url);
 const pdf = require("pdf-parse");
 
-// Real Text Extraction for PDFs
-// Logic: If file is PDF, use pdf-parse. If image, use Tesseract (skipped here due to errors, or we can assume PDFs for invoices).
+// Real Text Extraction for PDFs & Images
 export async function runOCR(filePath) {
   try {
     const dataBuffer = fs.readFileSync(filePath);
 
-    // Check for PDF signature
-    if (filePath.toLowerCase().endsWith(".pdf")) {
+    // Check for PDF signature (Magic Bytes: %PDF so 0x25 0x50 0x44 0x46)
+    const isPdf = dataBuffer.lastIndexOf("%PDF-", 0) === 0;
+
+    if (isPdf || filePath.toLowerCase().endsWith(".pdf")) {
       const data = await pdf(dataBuffer);
       console.log("[OCR] PDF Text extracted length:", data.text.length);
       return data.text;
     } else {
-      // Fallback for images if Tesseract is broken on Windows Node 22
-      // For a hackathon demo, we prefer PDF invoices anyway.
-      console.warn("[OCR] Image OCR is currently disabled. Please use PDF.");
-      return "INVOICE DATA (Image OCR Unavailable - Please upload PDF) \n Vendor: Demo Vendor \n Amount: 0";
+      // Image OCR using Tesseract.js
+      console.log("[OCR] Processing image with Tesseract...");
+      const { data: { text } } = await Tesseract.recognize(filePath, 'eng', {
+        logger: m => { if (m.status === 'recognizing text') console.log(`[OCR] Progress: ${Math.round(m.progress * 100)}%`); }
+      });
+      console.log("[OCR] Image Text extracted length:", text.length);
+      return text;
     }
-
   } catch (e) {
-    console.error("[OCR] Parsing failed:", e);
+    console.error(`[OCR] Parsing failed for ${filePath}:`, e.toString());
     return "Error reading document text";
   }
 }

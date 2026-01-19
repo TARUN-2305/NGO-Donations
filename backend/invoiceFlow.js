@@ -100,15 +100,25 @@ export async function adminVote(invoiceId, admin) {
 
       // 3. Find PayoutID from logs
       let payoutId = null;
+      console.log(`receipt.logs.length: ${receipt.logs.length}`);
       for (const log of receipt.logs) {
         try {
           const parsed = treasury.interface.parseLog(log);
-          if (parsed && parsed.name === "PayoutQueued") {
-            payoutId = parsed.args[0]; // id is first arg
-            console.log(`   Event Found: PayoutQueued #${payoutId}`);
-            break;
+          if (parsed) {
+            console.log(`Log parsed: ${parsed.name}`);
+            console.log(`Args:`, parsed.args);
+            if (parsed.name === "PayoutQueued") {
+              // Try to get ID from named arg 'id' or index 0
+              payoutId = parsed.args.id !== undefined ? parsed.args.id : parsed.args[0];
+              console.log(`   Event Found: PayoutQueued #${payoutId}`);
+              break;
+            }
+          } else {
+            console.log("Log parsed as null");
           }
-        } catch (e) { /* ignore */ }
+        } catch (e) {
+          console.log("Log parse error or mismatch:", e.message);
+        }
       }
 
       if (payoutId !== null) {
@@ -126,9 +136,15 @@ export async function adminVote(invoiceId, admin) {
           console.log(`   Updating Milestone #${inv.milestoneId} to 'COMPLETED'`);
           updateMilestoneStatus(inv.milestoneId, "COMPLETED");
         }
+        // Save immediately
+        const { saveInvoiceState } = await import("./invoiceStore.js");
+        saveInvoiceState(inv.id);
       } else {
         console.warn("   ⚠️ Could not find PayoutQueued event in receipt. Marked as APPROVED_QUEUED.");
         inv.status = "APPROVED_QUEUED";
+        // Save immediately
+        const { saveInvoiceState } = await import("./invoiceStore.js");
+        saveInvoiceState(inv.id);
       }
 
     } catch (err) {

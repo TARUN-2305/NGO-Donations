@@ -188,7 +188,7 @@ function StatBox({ label, value }) {
 }
 
 function MilestoneCard({ ms }) {
-    const isCompleted = ms.invoices && ms.invoices.some(inv => inv.status === "APPROVED" || inv.status === "PAID");
+    const isCompleted = ms.status === "COMPLETED" || (ms.invoices && ms.invoices.some(inv => inv.status === "PAID"));
 
     return (
         <div className="card" style={{

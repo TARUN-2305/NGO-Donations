@@ -6,7 +6,30 @@
     "raised": 100,
     "status": "ACTIVE",
     "milestoneIds": [
-      1
+      1,
+      2
+    ]
+  },
+  "2": {
+    "id": 2,
+    "title": "Education for All",
+    "budget": 100,
+    "raised": 100,
+    "status": "ACTIVE",
+    "milestoneIds": [
+      3,
+      4
+    ]
+  },
+  "3": {
+    "id": 3,
+    "title": "Clothing for poor and needy",
+    "budget": 10000,
+    "raised": 8000,
+    "status": "ACTIVE",
+    "milestoneIds": [
+      5,
+      6
     ]
   }
 }
