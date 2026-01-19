@@ -16,7 +16,9 @@ export const invoiceVerifier = new ethers.Contract(
 export const treasury = new ethers.Contract(
   process.env.TREASURY,
   [
-    "function queuePayout(address,uint256)"
+    "function queuePayout(address,uint256) returns (uint256)",
+    "function executePayout(uint256)",
+    "event PayoutQueued(uint256 indexed id, address indexed recipient, uint256 amount)"
   ],
   wallet
 );

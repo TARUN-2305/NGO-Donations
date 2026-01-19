@@ -1,0 +1,12 @@
+{
+  "1": {
+    "id": 1,
+    "title": "Rural Education",
+    "budget": 100,
+    "raised": 100,
+    "status": "ACTIVE",
+    "milestoneIds": [
+      1
+    ]
+  }
+}

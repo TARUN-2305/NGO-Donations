@@ -1,0 +1,37 @@
+{
+  "1": {
+    "id": 1,
+    "vendor": "0xD0BDB0e48440063F09EA680010EC8917F5fc1E9c",
+    "amount": 50,
+    "text": "INVOICE DATA (Image OCR Unavailable - Please upload PDF) \n Vendor: Demo Vendor \n Amount: 0",
+    "extracted": {
+      "invoiceNumber": "INVOICE",
+      "amount": null,
+      "date": null
+    },
+    "mlResult": {
+      "credibility_score": 10,
+      "decision": "REJECT",
+      "flags": [
+        "amount_contradiction",
+        "missing_ocr_data"
+      ],
+      "explanation": "Claimed amount contradicts the amount extracted from the raw text snippet, and critical OCR fields are missing."
+    },
+    "fileCid": "QmdhsX6h9oxGNiQ9Vqq8oj6MXX2tBsG4MXXfX8AUzPks4C",
+    "milestoneId": 1,
+    "ipfs": {
+      "cid": "QmRSDaMbv4BRuD7dCaBYiggEz5d5t2DEKqmnTpU3jxqhMR",
+      "encryption": {
+        "algorithm": "aes-256-cbc",
+        "key": "04d3c78d572c4bbcfe962c51bc9222e608b8594fe3444f558ca16953f03ce3fb",
+        "iv": "a56ed2876e6ade93e909ecd09ccd6dc8"
+      }
+    },
+    "votes": [
+      "0x4F5bF4A4A3792757444212ab82eB968B76E4fFaE",
+      "0x50909Eea8B572b23cB39C5e82a8c8e2d0Ed247eF"
+    ],
+    "status": "APPROVED_QUEUED"
+  }
+}
