@@ -1,81 +1,161 @@
-# Web3 NGO Donation & AI Verification Platform
+# Web3-Based NGO Donation Platform with AI-Enhanced Verification
 
-A transparency-first donation platform that uses **Blockchain for settlement**, **IPFS for evidence**, and **AI for verification**.
+This repository contains the source code for a transparent charitable donation platform built on Ethereum. It solves the "Oracle Problem" in philanthropy by using a hybrid architecture where on-chain fund release is controlled by an AI-assisted audit of off-chain vendor invoices.
 
-## 🚀 The Core Problem Solved
-Traditional NGOs are black boxes. You donate, but you never see the actual invoices or receipts.
-**We solve this by:**
-1.  **Automated Verification**: AI (Gemini + OCR) reads every invoice uploaded by the NGO.
-2.  **Public Evidence**: The **RAW** invoice file is uploaded to IPFS. It is immutable and visible to donors/admins.
-3.  **Governance**: Admins must vote to approve invoices based on AI credibility scores.
-4.  **Trustless Payout**: Funds are tied to specific **Causes** and **Milestones** and released from an on-chain Treasury only after approval.
+## 🚀 Features
 
----
-
-## 🏗️ Architecture
-
-### 1. The "Trust" Layer (Smart Contracts)
-*   `DonationRegistry.sol`: Records every donation on-chain with a privacy-preserving commitment.
-*   `Treasury.sol`: Holds the funds. Enforces a 2/3 admin vote (via backend oracle) and a Timelock before releasing funds.
-*   `InvoiceVerifier.sol`: Stores the "Attestation" (Decision + AI Score + Evidence Hash) on-chain.
-
-### 2. The "Intelligence" Layer (Backend)
-*   **Gemini AI**: Analyzes the invoice ("Does the date match?", "Is the vendor legit?", "Does the math add up?").
-*   **Tesseract OCR**: Extracts raw text from images/PDFs.
-*   **IPFS (Pinata)**: Anchors the **Raw Invoice File** and the **Encrypted Metadata Bundle**.
-
-### 3. The "Interaction" Layer (Frontend)
-*   **Donor Dashboard**: View active causes, milestone progress, and donate ETH.
-*   **Admin Dashboard**: Create causes, define milestones, review AI-flagged invoices, and vote.
+-   **Transparent Donations**: Donors send funds to a `DonationRegistry` smart contract, linked to specific causes.
+-   **Milestone-Based Escrow**: Funds are locked in a `Treasury` contract and released *only* when specific milestones are met.
+-   **AI-Powered Auditing**: Google Gemini 1.5 Flash acts as a financial auditor, verifying OCR-extracted invoice data against claimed amounts to prevent fraud.
+-   **Multi-Signature Governance**: A 2/3rds consensus mechanism among administrators is required to approve payouts, ensuring human oversight.
+-   **Automated Payouts**: Once approved, the smart contract automatically transfers funds directly to the vendor, eliminating intermediaries.
 
 ---
 
-## 🛠️ Tech Stack
-*   **Blockchain**: Hardhat, Solidity, Ethereum (Sepolia).
-*   **Backend**: Node.js, Express, Multer, Google Gemini API.
-*   **Storage**: IPFS (via Pinata).
-*   **Frontend**: React, Vite, Ethers.js.
+## 🛠️ Technology Stack
+
+-   **Frontend**: React.js, Vite, Ethers.js
+-   **Backend**: Node.js, Express.js
+-   **Blockchain**: Ethereum (Sepolia Testnet), Hardhat
+-   **AI/ML**: Google Gemini API (Generative AI)
+-   **Storage**: IPFS (Pinata)
+-   **OCR**: Tesseract.js (Images), pdf-parse (PDFs)
 
 ---
 
-## 🏃‍♂️ How to Run
+## 📋 Prerequisites
 
-### Prerequisities
-*   Node.js (v18+)
-*   Metamask Wallet (Sepolia ETH)
-*   Pinata API Keys (for IPFS)
-*   Gemini API Key (for AI)
+Before you begin, ensure you have the following installed:
 
-### 1. Start the Backend
+1.  **Node.js** (v18 or higher)
+2.  **MetaMask** Browser Extension
+3.  **Git**
+4.  An **Alchemy** or **Infura** account (for Sepolia RPC URL)
+5.  A **Google Cloud** account (for Gemini API Key)
+6.  A **Pinata** account (for IPFS storage)
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/TARUN-2305/NGO-Donations.git
+cd NGO-Donations
+```
+
+### 2. Backend Setup
+
+The backend handles OCR processing, communicating with the AI, and pinning files to IPFS.
+
 ```bash
 cd backend
 npm install
-# Create a .env file with PINATA_JWT, GEMINI_API_KEY, PRIVATE_KEY (Admin), RPC_URL
-npm start
 ```
 
-### 2. Start the Frontend
+**Create a `.env` file in the `backend` directory:**
+
+```env
+# Blockchain Configuration
+RPC_URL="https://eth-sepolia.g.alchemy.com/v2/YOUR_ALCHEMY_KEY"
+PRIVATE_KEY="YOUR_ADMIN_WALLET_PRIVATE_KEY" # Must have Sepolia ETH
+
+# Contract Addresses (Deployed on Sepolia)
+DONATION_REGISTRY="0x..."
+INVOICE_VERIFIER="0x..."
+TREASURY="0x..."
+
+# AI Configuration
+GEMINI_API_KEY="YOUR_GOOGLE_GEMINI_API_KEY"
+
+# IPFS Configuration
+PINATA_API_KEY="YOUR_PINATA_API_KEY"
+PINATA_SECRET_API_KEY="YOUR_PINATA_SECRET"
+```
+
+### 3. Frontend Setup
+
+The frontend is the user interface for donors and admins.
+
 ```bash
-cd frontend
+cd ../frontend
 npm install
-npm run dev
 ```
 
-### 3. Usage Flow
-1.  **Admin**: Log in -> Create a "Cause" (e.g., "Build School").
-2.  **Admin**: Add a "Milestone" (e.g., "Buy Bricks - ₹50,000").
-3.  **Donor**: Go to dashboard -> Donate ETH to the Cause.
-4.  **Admin**: Uploads a Vendor Invoice for "Bricks".
-5.  **System**:
-    *   OCR reads text.
-    *   Gemini validates amounts/dates.
-    *   Raw file uploaded to IPFS.
-6.  **Admin**: Reviews the AI Score + Raw Evidence -> Votes to Approve.
-7.  **Treasury**: Releases ETH to the Vendor.
+*(Note: Ensure `src/pages/CauseDetails.jsx` and other files reference the correct backend URL `http://localhost:3000` and contract addresses if they are hardcoded).*
 
 ---
 
-## 📝 Smart Contract Addresses (Sepolia)
-*   **DonationRegistry**: `0x53e6cC3931521D18A1220355B965a4e164e79957`
-*   **Treasury**: `[Check Deploy Log]`
-*   **InvoiceVerifier**: `[Check Deploy Log]`
+## 🚀 Running the Application
+
+### 1. Start the Backend Server
+
+```bash
+cd backend
+node index.js
+```
+*The server will start on `http://localhost:3000`.*
+
+### 2. Start the Frontend Development Server
+
+Open a new terminal:
+```bash
+cd frontend
+npm run dev
+```
+*The application will unlock at `http://localhost:5173`.*
+
+---
+
+## 📜 Usage Guide
+
+### 1. For Donors
+1.  Connect your Wallet (MetaMask).
+2.  Browse "Causes" on the home page.
+3.  Click "View Details" on a cause.
+4.  Enter an ETH amount and click **Donate**.
+5.  Your donation is recorded on-chain, and the progress bar updates.
+
+### 2. For NGO Admins (Milestone & Invoice)
+1.  Go to the **Admin Dashboard** (`/admin`).
+2.  Select "Create Milestone" to define a spending goal (e.g., "Buy 500 Notebooks").
+3.  **Upload Invoice**:
+    *   Select the Vendor.
+    *   Enter the Claim Amount (in INR/Fiat abstraction).
+    *   Upload the PDF or Image of the invoice.
+    *   Submit.
+
+### 3. For Platform Admins (Voting)
+1.  On the Admin Dashboard, view "Pending Approvals".
+2.  Review the **AI Analysis**:
+    *   **Green**: Credibility Score > 80 (Safe).
+    *   **Red**: Low score (Potential Fraud).
+3.  Click **Approve**.
+4.  Once 2/3rds of admins approve, the system automatically:
+    *   Attests the invoice on-chain.
+    *   Triggers the Treasury.
+    *   **Pays the Vendor** directly in ETH.
+
+---
+
+## 📄 Research Paper
+
+A detailed IEEE-format research paper explaining the architecture and algorithms is available in the `Research_Paper/` directory.
+
+---
+
+## 👥 Contributors
+
+-   **Vijay Narayan Raikar** (RVCE)
+-   **Tarun R** (RVCE)
+-   **Suhas Shetti** (RVCE)
+-   **Nandini C** (RVCE)
+-   **K Y Hemalatha** (RVCE)
+
+**Mentor**: Prof. Jayanthi P N
+
+---
+
+## 📄 License
+MIT License
