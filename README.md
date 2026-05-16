@@ -139,23 +139,5 @@ npm run dev
 
 ---
 
-## 📄 Research Paper
-
-A detailed IEEE-format research paper explaining the architecture and algorithms is available in the `Research_Paper/` directory.
-
----
-
-## 👥 Contributors
-
--   **Vijay Narayan Raikar** (RVCE)
--   **Tarun R** (RVCE)
--   **Suhas Shetti** (RVCE)
--   **Nandini C** (RVCE)
--   **K Y Hemalatha** (RVCE)
-
-**Mentor**: Prof. Jayanthi P N
-
----
-
 ## 📄 License
 MIT License
